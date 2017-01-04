@@ -16,21 +16,48 @@ $(document).com('turbolinks:load',function(){
         cvcNum = $('#card_code').val,
         expMonth = $('#card_month').val,
         expYear = $('card_year').val;
-      //send cc info to stripe
+      //Use Stripe JS library to check for card errors.
+      var error = false;
+      //Validate cc number.
+      if(!Stripe.card.validateCardNumber(ccNum)) {
+        error = true;
+        alert('The credit card number appears to be invalid');
+      }
+      //Validate CVC number.
+      if(!Stripe.card.validateCVC(cvcNum)) {
+        error = true;
+        alert('The CVC number appears to be invalid');
+      }
+      //Validate expiration date.
+      if(!Stripe.card.validateExpiry(expMonth, expYear)) {
+        error = true;
+        alert('The expiration date appears to be invalid');
+      }
+      if (error) {
+        //If there are cc errors, don't send to Stripe.
+        submitBtn.prop('disabled', false).val("Sign Up");
+      } else {
+        //Send the cc info to Stripe.
         Stripe.createToken({
           number: ccNum,
           cvc: cvcNum,
           exp_month: expMonth,
           exp_year: expYear
         }, stripeResponseHandler);
-    
+      }
+      return false;
   });
-  //prevent default sbmission behaivior
+  //Stripe will return cc token
+  function stripeResponseHandler(status, response){
+    //Get token from response
+    var token = response.id;
+    //Inject cc token as hidden field into form
+    theForm.append( $('<input type="hidden" name="user[stripe_card_token]">').val(token) );
+    //Submit form to rails app
+    theForm.get(0).submit();
+  }
   
-  //Collect the cc fields
-  //send cc info to stripe
-  //stripe will return cc token
-  //inject cc token as hidden field into form
-  //submit form to rails app
+  
 
+  
 });
