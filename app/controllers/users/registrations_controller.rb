@@ -2,7 +2,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :select_plan, only: :new
   
   # Extend default devise gem behaivor so that users signing up with Pro
-  # savewith a special Stripe subscription function.
+  # save with a special Stripe subscription function.
   # Otherwise Devise devise signs user up as usual 
   def create
     super do |resource|
@@ -16,6 +16,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       end
     end
   end
+
   
   private
     def select_plan
