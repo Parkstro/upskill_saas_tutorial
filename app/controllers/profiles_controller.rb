@@ -39,9 +39,9 @@ class ProfilesController < ApplicationController
       @profile = @user.profile
       # mass assign edited profile attributes and save (update)
       if @profile.update_attributes(profile_params)
-         flash[success] = "Profile Updated!"
+         flash[:success] = "Profile Updated!"
          # Redirect user to their profile page
-         redirect_to user_path(id: params[user_id])
+         redirect_to user_path(id: params[:user_id])
       else
          render action: :edit
       end
@@ -49,7 +49,7 @@ class ProfilesController < ApplicationController
    
    private
       def profile_params
-         params.require(:profile).permit(:first_name, :last_name, :avatar, :job_title, :contact_email, :desctiption)
+         params.require(:profile).permit(:first_name, :last_name, :avatar, :job_title, :contact_email, :description)
       end
       
       def only_current_user

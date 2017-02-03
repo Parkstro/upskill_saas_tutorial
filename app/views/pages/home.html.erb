@@ -12,16 +12,16 @@
                       <%= link_to "Edit your profile", edit_user_profile_path(user_id: current_user.id), class: 'btn btn-default btn-lg btn-block' %>
                       <%= link_to "View your profile", user_path(id: current_user.id), class: 'btn btn-default btn-lg btn-block' %>
                     <% else %>
-                        <%= link_to "create your profile", new_user_profile_path(user_id: current_user.id), class: 'btn btn-default btn-lg btn-block' %>
-                    <% end %>  
+                        </br><%= link_to "create your profile", new_user_profile_path(user_id: current_user.id), class: 'btn btn-default btn-lg btn-block' %>
+                    <% end %> 
+                </div>
           </div>
           <div class="col-md-6">
               <div class="well">
                   <h2 class="text-center">The Community</h2>
-                  <p class="text-center">Visit the community to meet other developers, entrepeneurs, and investors!</p>
-                  <%= link_to "Visit the community", users_path, class: 'btn btn-default btn-lg btn-block' %>
+                  <p class="text-center">Visit the community to meet other developers, entrepeneurs, and investors!</p></br>
+                  <%= link_to "Visit the community", users_url, class: 'btn btn-default btn-lg btn-block' %>
               </div>
-              
           </div>
         
         <% else %>

@@ -1,8 +1,8 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-8 col-md-offest-2">
+    <div class="col-md-9 col-md-offest-3">
       <h1 class="text-center">DevMatch Community</h1>
-      <p class="text-center">Welcom to the DevMatch community. UIsers must fill out a profile in order to be visible in the community</p>
+      <p class="text-center">Welcome to the DevMatch community. Users must fill out a profile in order to be visible in the community</p>
       <ul class="list-unstyled">
         <% @users.each do |user| %>
           <% if user.profile %>
@@ -11,12 +11,12 @@
                 <div class="col-sm-4 text-center">
                   <% if user.profile.avatar %>
                     <%= link_to user do %>
-                      <%= image_tag user.profile.url, class: 'user-index-avatar' %>
+                      <%= image_tag user.profile.avatar.url, class: 'user-index-avatar' %>
                     <% end %>
                   <% end %>
                 </div>
                 <div>
-                  <% link_to user do %>
+                  <%= link_to user do %>
                     <h2><%= user.profile.first_name %> <%= user.profile.last_name %></h2>
                   <% end %>  
                     <p>
@@ -30,7 +30,6 @@
               </div>
             </li>
           <% end %>
-        <% end %>
       </ul>
     </div>
   </div>
